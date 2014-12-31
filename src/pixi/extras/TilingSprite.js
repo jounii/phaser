@@ -252,8 +252,8 @@ PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
     tilePosition.y %= this.tilingTexture.baseTexture.height;
 
     // offset - make sure to account for the anchor point..
-    context.scale(tileScale.x,tileScale.y);
     context.translate(tilePosition.x + (this.anchor.x * -this._width), tilePosition.y + (this.anchor.y * -this._height));
+    context.scale(tileScale.x,tileScale.y);
 
     context.fillStyle = this.__tilePattern;
 
