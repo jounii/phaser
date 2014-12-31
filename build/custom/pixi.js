@@ -10083,7 +10083,7 @@ PIXI.TilingSprite = function(texture, width, height)
      * @type Point
      */
     this.tileScaleOffset = new PIXI.Point(1,1);
-    
+
     /**
      * The offset position of the image that is being tiled
      *
@@ -10109,7 +10109,7 @@ PIXI.TilingSprite = function(texture, width, height)
      * @default 0xFFFFFF
      */
     this.tint = 0xFFFFFF;
-    
+
     /**
      * The blend mode to be applied to the sprite
      *
@@ -10119,7 +10119,7 @@ PIXI.TilingSprite = function(texture, width, height)
      */
     this.blendMode = PIXI.blendModes.NORMAL;
 
-    
+
 
 };
 
@@ -10139,7 +10139,7 @@ Object.defineProperty(PIXI.TilingSprite.prototype, 'width', {
         return this._width;
     },
     set: function(value) {
-        
+
         this._width = value;
     }
 });
@@ -10174,7 +10174,7 @@ PIXI.TilingSprite.prototype.setTexture = function(texture)
 * Renders the object using the WebGL renderer
 *
 * @method _renderWebGL
-* @param renderSession {RenderSession} 
+* @param renderSession {RenderSession}
 * @private
 */
 PIXI.TilingSprite.prototype._renderWebGL = function(renderSession)
@@ -10195,7 +10195,7 @@ PIXI.TilingSprite.prototype._renderWebGL = function(renderSession)
         renderSession.filterManager.pushFilter(this._filterBlock);
     }
 
-   
+
 
     if (!this.tilingTexture || this.refreshTexture)
     {
@@ -10223,7 +10223,7 @@ PIXI.TilingSprite.prototype._renderWebGL = function(renderSession)
 
     if (this._filters) renderSession.filterManager.popFilter();
     if (this._mask) renderSession.maskManager.popMask(this._mask, renderSession);
-    
+
     renderSession.spriteBatch.start();
 };
 
@@ -10231,13 +10231,13 @@ PIXI.TilingSprite.prototype._renderWebGL = function(renderSession)
 * Renders the object using the Canvas renderer
 *
 * @method _renderCanvas
-* @param renderSession {RenderSession} 
+* @param renderSession {RenderSession}
 * @private
 */
 PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
 {
     if (this.visible === false || this.alpha === 0)return;
-    
+
     var context = renderSession.context;
 
     if (this._mask)
@@ -10246,7 +10246,7 @@ PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
     }
 
     context.globalAlpha = this.worldAlpha;
-    
+
     var transform = this.worldTransform;
 
     var i,j;
@@ -10263,7 +10263,7 @@ PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
     if (!this.__tilePattern ||  this.refreshTexture)
     {
         this.generateTilingTexture(false);
-    
+
         if (this.tilingTexture)
         {
             this.__tilePattern = context.createPattern(this.tilingTexture.baseTexture.source, 'repeat');
@@ -10288,8 +10288,8 @@ PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
     tilePosition.y %= this.tilingTexture.baseTexture.height;
 
     // offset - make sure to account for the anchor point..
-    context.scale(tileScale.x,tileScale.y);
     context.translate(tilePosition.x + (this.anchor.x * -this._width), tilePosition.y + (this.anchor.y * -this._height));
+    context.scale(tileScale.x,tileScale.y);
 
     context.fillStyle = this.__tilePattern;
 
@@ -10338,7 +10338,7 @@ PIXI.TilingSprite.prototype.getBounds = function()
     var d = worldTransform.d;
     var tx = worldTransform.tx;
     var ty = worldTransform.ty;
-    
+
     var x1 = a * w1 + c * h1 + tx;
     var y1 = d * h1 + b * w1 + ty;
 
@@ -10407,9 +10407,9 @@ PIXI.TilingSprite.prototype.onTextureUpdate = function()
 
 
 /**
-* 
+*
 * @method generateTilingTexture
-* 
+*
 * @param forcePowerOfTwo {Boolean} Whether we want to force the texture to be a power of two
 */
 PIXI.TilingSprite.prototype.generateTilingTexture = function(forcePowerOfTwo)
@@ -10431,7 +10431,7 @@ PIXI.TilingSprite.prototype.generateTilingTexture = function(forcePowerOfTwo)
         {
             targetWidth = frame.width;
             targetHeight = frame.height;
-           
+
             newTextureRequired = true;
         }
     }
@@ -10493,10 +10493,10 @@ PIXI.TilingSprite.prototype.generateTilingTexture = function(forcePowerOfTwo)
     }
 
     this.refreshTexture = false;
-    
+
     this.originalTexture = this.texture;
     this.texture = this.tilingTexture;
-    
+
     this.tilingTexture.baseTexture._powerOf2 = true;
 };
 
