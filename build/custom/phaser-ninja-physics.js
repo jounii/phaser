@@ -7,7 +7,7 @@
 *
 * Phaser - http://phaser.io
 *
-* v2.1.3 "Ravinda" - Built: Wed Dec 31 2014 14:38:07
+* v2.1.3 "Ravinda" - Built: Fri Jan 02 2015 13:01:57
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -10318,8 +10318,11 @@ PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
     tilePosition.y %= this.tilingTexture.baseTexture.height;
 
     // offset - make sure to account for the anchor point..
-    context.translate(tilePosition.x + (this.anchor.x * -this._width), tilePosition.y + (this.anchor.y * -this._height));
-    context.scale(tileScale.x,tileScale.y);
+    context.translate(
+        (tilePosition.x * tileScale.x) + (this.anchor.x * -this._width),
+        (tilePosition.y * tileScale.x) + (this.anchor.y * -this._height)
+    );
+    context.scale(tileScale.x, tileScale.y);
 
     context.fillStyle = this.__tilePattern;
 
@@ -10329,7 +10332,10 @@ PIXI.TilingSprite.prototype._renderCanvas = function(renderSession)
                     this._height / tileScale.y);
 
     context.scale(1 / tileScale.x, 1 / tileScale.y);
-    context.translate(-tilePosition.x + (this.anchor.x * this._width), -tilePosition.y + (this.anchor.y * this._height));
+    context.translate(
+        (-tilePosition.x * tileScale.x) + (this.anchor.x * this._width),
+        (-tilePosition.y * tileScale.x) + (this.anchor.y * this._height)
+    );
 
     if (this._mask)
     {
@@ -11582,7 +11588,7 @@ PIXI.AbstractFilter.prototype.apply = function(frameBuffer)
 *
 * Phaser - http://phaser.io
 *
-* v2.1.3 "Ravinda" - Built: Wed Dec 31 2014 14:38:07
+* v2.1.3 "Ravinda" - Built: Fri Jan 02 2015 13:01:57
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
